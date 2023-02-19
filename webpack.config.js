@@ -8,31 +8,35 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'assets/images/[hash][ext]',
+    assetModuleFilename: '[file][hash][ext]'
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js']
   },
   module: {
     rules: [
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: 'babel-loader'
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset/resource' },
-    ],
+      {
+        test: /\.(woff|woff2)$/,
+        type: 'asset/resource'
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
       template: './public/index.html',
-      filename: './index.html',
+      filename: './index.html'
     }),
-    new MiniCssExtractPlugin(),
-  ],
+    new MiniCssExtractPlugin()
+  ]
 }
